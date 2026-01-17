@@ -38,7 +38,7 @@
 
 <!-- Add the JavaScript right before the closing body tag -->
 <script>
-    // 1. Define your list of splash texts
+    // 1. Define your list of splash texts (the Array)
     const splashes = [
         "Now with more bytes!",
         "Powered by GitHub Pages!",
@@ -54,13 +54,22 @@
       "splash text! "
     ];
 
-    // 2. Select a random splash text
-    const randomIndex = Math.floor(Math.random() * splashes.length);
-    const selectedSplash = splashes[randomIndex];
+    // Function to select and display a new random splash text
+    function updateSplashText() {
+        const randomIndex = Math.floor(Math.random() * splashes.length);
+        const selectedSplash = splashes[randomIndex];
+        // Note: The lottery number line will recalculate every click!
+        document.getElementById('splash-text').textContent = selectedSplash;
+    }
 
-    // 3. Display the selected text in the HTML element with id="splash-text"
-    document.getElementById('splash-text').textContent = selectedSplash;
+    // 2. Display an initial splash text when the page loads
+    updateSplashText();
+
+    // 3. Add an event listener to change the text every time it is clicked
+    // Ensure you have <span id="splash-text"></span> in your HTML body
+    document.getElementById('splash-text').addEventListener('click', updateSplashText);
 </script>
+
 </body>
 </html>
 
