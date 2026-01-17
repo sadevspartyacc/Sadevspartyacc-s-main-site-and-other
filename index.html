@@ -8,13 +8,60 @@
         border-radius: 2em;
         border: solid 1em #FFEEDD;
         padding: 3em;
+        /* Optional: Style the splash text itself */
+        font-style: italic;
+        color: #777;
+        margin-top: 1em;
+      }
+      /* Style for the main heading */
+      h1 {
+          display: inline-block;
+          margin-right: 10px; /* Space between title and splash */
+      }
+      /* Style for the splash text */
+      #splash-text {
+          display: inline-block;
+          font-size: 1.2em;
+          color: #FF5733; /* A bright color for contrast */
+          transform: rotate(-5deg); /* Give it a fun angle */
       }
     </style>
   </head>
 <body>
 <h1>Hello!</h1>
+<!-- This is where the splash text will appear -->
+<span id="splash-text"></span>
+
   <div class=container>
 <p>Welcome to sadevspartyacc's main page.</p>
   </div>
+
+<!-- Add the JavaScript right before the closing body tag -->
+<script>
+    // 1. Define your list of splash texts
+    const splashes = [
+        "Now with more bytes!",
+        "Powered by GitHub Pages!",
+        "I'm nine years old!",
+        "Featuring funcbeats!",
+        "Still in development!", 
+      " I can't stop twiddling my fingers", 
+      Math.floor(Math.random()*777)+" todays winning lottery number", 
+      "I'd prefer tea instead of coffee.", 
+      "But you can call it CHASYXX+", 
+      "bytebeat...", 
+      " I love CHASYXX and deca quitin ", 
+      "splash text list: "+splashes.toString()
+    ];
+
+    // 2. Select a random splash text
+    const randomIndex = Math.floor(Math.random() * splashes.length);
+    const selectedSplash = splashes[randomIndex];
+
+    // 3. Display the selected text in the HTML element with id="splash-text"
+    document.getElementById('splash-text').textContent = selectedSplash;
+</script>
+
 </body>
 </html>
+
