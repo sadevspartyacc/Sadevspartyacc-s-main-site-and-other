@@ -1,32 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
+<head>
     <title>sadevspartyacc's main page</title>
+    <!-- Link the Ubuntu font from  -->
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    
     <style>
+      /* Define the Mojangles font using @font-face and a direct link */
+      @font-face {
+          font-family: 'Mojangles';
+          src: url('https://cdn.jsdelivr.net') format('opentype'); /* Link */
+      }
+
+      /* Apply Ubuntu to the entire body (all text by default) */
+      body {
+        font-family: 'Ubuntu', sans-serif;
+        background: linear-gradient(to right, #4a69bd, #607d8b); /* Added a background gradient */
+      }
+
       .container {
         background: #FFAA11;
         border-radius: 2em;
         border: solid 1em #FFEEDD;
         padding: 3em;
-        /* Optional: Style the splash text itself */
-        font-style: italic;
-        color: #777;
-        margin-top: 1em;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
-      /* Style for the main heading */
+
+      /* Apply the specific Mojangles font to the splash text */
+      #splash-text {
+          font-family: 'Mojangles', sans-serif;
+          font-size: 1.5em; /* Made it bigger */
+          color: #FF5733;
+          transform: rotate(-5deg);
+      }
       h1 {
           display: inline-block;
-          margin-right: 10px; /* Space between title and splash */
-      }
-      /* Style for the splash text */
-      #splash-text {
-          display: inline-block;
-          font-size: 1.2em;
-          color: #FF5733; /* A bright color for contrast */
-          transform: rotate(-5deg); /* Give it a fun angle */
+          margin-right: 10px;
       }
     </style>
-  </head>
+</head>
 <body>
 <h1>Hello!</h1>
 <!-- This is where the splash text will appear -->
@@ -73,5 +85,5 @@
 </script>
 
 </body>
-</html>
+</html> 
 
