@@ -1,79 +1,107 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sadevspartyacc's main page</title>
-    <!-- Подключаем Ubuntu и пиксельный шрифт (аналог Mojangles) -->
+    
+    <!-- Подключаем Google Fonts: Ubuntu и VT323 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&family=VT323&display=swap" rel="stylesheet">
 
     <style>
-      /* Применяем Ubuntu ко всему сайту */
-      body {
-        font-family: 'Ubuntu', sans-serif;
-      }
-
-      .container {
-        background: #FFAA11;
-        border-radius: 2em;
-        border: solid 1em #FFEEDD;
-        padding: 3em;
-        font-style: italic;
-        color: #777;
-        margin-top: 1em;
-      }
-
-      h1 {
-          display: inline-block;
-          margin-right: 10px;
-      }
-
-      /* Применяем Mojangles (VT323) только к splash-text */
-      #splash-text {
-          display: inline-block;
-          font-family: 'VT323', monospace;
-          font-size: 1.8em; /* Пиксельные шрифты обычно требуют большего размера */
-          color: #FF5733;
-          transform: rotate(-5deg);
-          text-shadow: 2px 2px #00000033; /* Небольшая тень для эффекта игры */
-          cursor: pointer;
-          user-select: none;
-      }
+        /* Общие настройки */
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background-color: #fafafa;
+            color: #333;
+            text-align: center;
+            padding-top: 50px;
+        }
+        
+        /* Стиль для основного контейнера */
+        .container {
+            background: #ffaa11;
+            border-radius: 2em;
+            border: solid 1em #ffeedd;
+            padding: 3em;
+            font-style: italic;
+            color: #777;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px;
+            margin: auto;
+        }
+        
+        /* Splash Text: стиль для специального элемента */
+        #splash-text {
+            display: inline-block;
+            font-family: 'VT323', monospace;
+            font-size: 1.8em;
+            color: #ff5733;
+            transform: rotate(-5deg); /* Наклон текста */
+            text-shadow: 2px 2px #00000033; /* Тень */
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        /* Добавляем анимацию плавного появления текста */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        h1, p, #splash-text {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
     </style>
-  </head>
+</head>
 <body>
 
+<!-- Заголовок -->
 <h1>Hello!</h1>
-<span id="splash-text"></span>
 
+<!-- Динамический текст -->
+<span id="splash-text">Click me for a surprise!</span>
+
+<!-- Основное описание -->
 <div class="container">
     <p>Welcome to sadevspartyacc's main page.</p>
 </div>
 
+<!-- JavaScript для смены текста -->
 <script>
+    // Массив возможных строк для сплеш-текста
     const splashes = [
         "Now with more bytes!",
         "Powered by GitHub Pages!",
         "I'm nine years old!",
         "Featuring funcbeats!",
-        "Still in development!", 
-        "I can't stop twiddling my fingers", 
-        Math.floor(Math.random()*777)+" todays winning lottery number", 
-        "I'd prefer tea instead of coffee.", 
-        "But you can call it CHASYXX+", 
-        "bytebeat...", 
-        "I love CHASYXX and deca quitin", 
-        "splash text!", 
-        "this is funny!", 
-        "day "+Math.floor(Math.random()*365)+" of creating byte beat"
+        "Still in development!",
+        "I can't stop twiddling my fingers",
+        `${Math.floor(Math.random()*777)} today’s winning lottery number`,
+        "I'd prefer tea instead of coffee.",
+        "But you can call it CHASYXX+",
+        "bytebeat...",
+        "I love CHASYXX and deca quitin",
+        "splash text!",
+        "this is funny!",
+        `Day ${Math.floor(Math.random()*365)} of creating byte beat`
     ];
 
+    // Функция обновления текста
     function updateSplashText() {
         const randomIndex = Math.floor(Math.random() * splashes.length);
         document.getElementById('splash-text').textContent = splashes[randomIndex];
     }
 
-    updateSplashText();
+    // Инициализация и обновление текста при загрузке страницы
+    window.addEventListener("load", () => {
+        updateSplashText(); // Первая инициализация
+    });
+
+    // Изменение текста при клике мыши
     document.getElementById('splash-text').addEventListener('click', updateSplashText);
 </script>
 
