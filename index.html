@@ -1,21 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>sadevspartyacc's main page</title>
-    <!-- Link the Ubuntu font from  -->
+    <!-- Подключаем Ubuntu и пиксельный шрифт (аналог Mojangles) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
-    
-    <style>
-      /* Define the Mojangles font using @font-face and a direct link */
-      @font-face {
-          font-family: 'Mojangles';
-          src: url('https://cdn.jsdelivr.net') format('opentype'); /* Link */
-      }
 
-      /* Apply Ubuntu to the entire body (all text by default) */
+    <style>
+      /* Применяем Ubuntu ко всему сайту */
       body {
         font-family: 'Ubuntu', sans-serif;
-        background: linear-gradient(to right, #4a69bd, #607d8b); /* Added a background gradient */
       }
 
       .container {
@@ -23,17 +18,67 @@
         border-radius: 2em;
         border: solid 1em #FFEEDD;
         padding: 3em;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        font-style: italic;
+        color: #777;
+        margin-top: 1em;
       }
 
-      /* Apply the specific Mojangles font to the splash text */
+      h1 {
+          display: inline-block;
+          margin-right: 10px;
+      }
+
+      /* Применяем Mojangles (VT323) только к splash-text */
       #splash-text {
-          font-family: 'Mojangles', sans-serif;
-          font-size: 1.5em; /* Made it bigger */
+          display: inline-block;
+          font-family: 'VT323', monospace;
+          font-size: 1.8em; /* Пиксельные шрифты обычно требуют большего размера */
           color: #FF5733;
           transform: rotate(-5deg);
+          text-shadow: 2px 2px #00000033; /* Небольшая тень для эффекта игры */
+          cursor: pointer;
+          user-select: none;
       }
-      h1 {
+    </style>
+  </head>
+<body>
+
+<h1>Hello!</h1>
+<span id="splash-text"></span>
+
+<div class="container">
+    <p>Welcome to sadevspartyacc's main page.</p>
+</div>
+
+<script>
+    const splashes = [
+        "Now with more bytes!",
+        "Powered by GitHub Pages!",
+        "I'm nine years old!",
+        "Featuring funcbeats!",
+        "Still in development!", 
+        "I can't stop twiddling my fingers", 
+        Math.floor(Math.random()*777)+" todays winning lottery number", 
+        "I'd prefer tea instead of coffee.", 
+        "But you can call it CHASYXX+", 
+        "bytebeat...", 
+        "I love CHASYXX and deca quitin", 
+        "splash text!", 
+        "this is funny!", 
+        "day "+Math.floor(Math.random()*365)+" of creating byte beat"
+    ];
+
+    function updateSplashText() {
+        const randomIndex = Math.floor(Math.random() * splashes.length);
+        document.getElementById('splash-text').textContent = splashes[randomIndex];
+    }
+
+    updateSplashText();
+    document.getElementById('splash-text').addEventListener('click', updateSplashText);
+</script>
+
+</body>
+</html>
           display: inline-block;
           margin-right: 10px;
       }
