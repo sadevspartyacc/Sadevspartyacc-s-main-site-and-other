@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sadevspartyacc's main page</title>
     
-    <!-- Подключаем Google Fonts: Ubuntu и VT323 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&family=VT323&display=swap" rel="stylesheet">
 
     <style>
-        /* Общие настройки */
         body {
             font-family: 'Ubuntu', sans-serif;
             background-color: #fafafa;
@@ -20,7 +18,6 @@
             padding-top: 50px;
         }
         
-        /* Стиль для основного контейнера */
         .container {
             background: #ffaa11;
             border-radius: 2em;
@@ -31,9 +28,69 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             width: 80%;
             max-width: 600px;
-            margin: auto;
+            margin: 20px auto;
         }
         
+        #splash-text {
+            display: inline-block;
+            font-family: 'VT323', monospace;
+            font-size: 2em;
+            color: #ffff00; /* Классический желтый цвет сплэша */
+            text-shadow: 2px 2px #3f3f00;
+            cursor: pointer;
+            user-select: none;
+            /* Анимация пульсации */
+            animation: splash-beat 0.5s infinite alternate;
+        }
+
+        @keyframes splash-beat {
+            from { transform: rotate(-5deg) scale(1); }
+            to { transform: rotate(-5deg) scale(1.1); }
+        }
+        
+        h1 { font-size: 3em; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>Hello!</h1>
+<span id="splash-text"></span>
+
+<div class="container">
+    <p>Welcome to sadevspartyacc's main page.</p>
+</div>
+
+<script>
+    const splashes = [
+        "t=374086 thrown: ͒͒͒͒͒͒͒͒͒0ঋ", // Твой редкий баг
+        "t=-73 thrown: 0ঋ",              // Отрицательный код!
+        "Now with more bytes!",
+        "Powered by GitHub Pages!",
+        "I'm nine years old!",
+        "Featuring funcbeats!",
+        "Still in development!",
+        "I can't stop twiddling my fingers",
+        `${Math.floor(Math.random()*777)} today’s winning lottery number`,
+        "I'd prefer tea instead of coffee.",
+        "But you can call it CHASYXX+",
+        "bytebeat...",
+        "I love CHASYXX and deca quitin",
+        "splash text!",
+        "this is funny!",
+        `Day ${Math.floor(Math.random()*365)} of creating byte beat`,`ai sloppiness level 98`
+    ];
+
+    function updateSplashText() {
+        const randomIndex = Math.floor(Math.random() * splashes.length);
+        document.getElementById('splash-text').textContent = splashes[randomIndex];
+    }
+
+    window.addEventListener("load", updateSplashText);
+    document.getElementById('splash-text').addEventListener('click', updateSplashText);
+</script>
+
+</body>
+</html>
         /* Splash Text: стиль для специального элемента */
         #splash-text {
             display: inline-block;
