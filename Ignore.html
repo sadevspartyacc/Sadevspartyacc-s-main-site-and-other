@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head><title>Bytebeat 32kHz</title></head>
+<body style="background:#000; display:flex; justify-content:center; align-items:center; height:100vh;">
+    <button id="play" style="padding:20px; cursor:pointer;">START THE 6021Hz SCREAM</button>
+
+<script>
+const audioCode = `
+    let t = 0;
+    let fx, fxi;
+    const S = f => Math.cbrt(Math.sin(f));
+    const C = f => Math.cbrt(Math.cos(f));
+    const T = Math.tanh;
+    const K = Math.cbrt;
+    const R = Math.random;
+
+    class BytebeatProcessor extends AudioWorkletProcessor {
+        process(inputs, outputs) {
+            const output = outputs[0];
+            const left = output[0];
+            const right = output[1];
+
+            for (let i = 0; i < left.length; i++) {
+                t++;
+                let tempT = t * 0.87505;
+                
+                // Твой движок
+                if (!fx) fx = new Float32Array(16384).fill(0);
+                fxi = 0;
+
+                const lp=(x,c)=>(fx[fxi]??=0,fx[fxi]+=(x-fx[fxi])*c);
+                const hp=(x,c)=>x-lp(x,c);
+                const bp=(x,hc,lc)=>hp(lp(x,lc),hc);
+                const lb=(x,c,v)=>x+lp(x,c)*v;
+                const hb=(x,c,v)=>x+hp(x,c)*v;
+                const btf=x=>(x)%256/128-1;
+
+                const x_func = j => {
+                    let val = T((bp(T(S(K(tempT%8192)*8*j))*(1-tempT/8192%1)**2*'1000010011000100'[tempT>>13&15]*10,0.3,0.01)+lb((R()-R())*(1-tempT/4096%1)**4/2,0.1,2)+lb((R()-R()+T(S(K(tempT%16384)*10*j))*(1-tempT/16384%1)**10)*(1-tempT/16384%1)**4*(tempT>>14&1),0.1,10))+btf(tempT/4.5*2**([0,0,5,7][tempT>>17&3]/12)*j)+btf(tempT/4.5*1.01*2**([0,0,5,7][tempT>>17&3]/12)*j)+btf(tempT/4.5*16*2**([0,(tempT&262144?5:3),7,12][tempT>>((tempT>>10)%64%24%16)&3]/12)*j));
+                    return val;
+                };
+
+                const outL = x_func(1.50005);
+                const outR = x_func(1.49995) + (x_func(x_func(1.49995))) / T(x_func(tempT/8000)/80) / 800 + S(x_func(1.5));
+                
+                left[i] = outL;
+                right[i] = outR;
+            }
+            return true;
+        }
+    }
+    registerProcessor('bytebeat-processor', BytebeatProcessor);
+`;
+
+document.getElementById('play').onclick = async () => {
+    const audioCtx = new AudioContext({ sampleRate: 32000 });
+    const blob = new Blob([audioCode], { type: 'application/javascript' });
+    const url = URL.createObjectURL(blob);
+    await audioCtx.audioWorklet.addModule(url);
+    const node = new AudioWorkletNode(audioCtx, 'bytebeat-processor');
+    node.connect(audioCtx.destination);
+    document.getElementById('play').innerText = "FRYING EGGS...";
+};
+</script>
+</body>
+</html>
+
